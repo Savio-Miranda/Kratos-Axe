@@ -53,6 +53,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReturnObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b6124dc-0fd6-47fb-a0cf-1de4503456b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ThrowObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc5021a2-521d-49c7-a405-ad1570c1f6de"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ReturnObject"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -215,6 +235,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_ThrowObject = m_Player.FindAction("ThrowObject", throwIfNotFound: true);
+        m_Player_ReturnObject = m_Player.FindAction("ReturnObject", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -277,6 +298,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_ThrowObject;
+    private readonly InputAction m_Player_ReturnObject;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -284,6 +306,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @ThrowObject => m_Wrapper.m_Player_ThrowObject;
+        public InputAction @ReturnObject => m_Wrapper.m_Player_ReturnObject;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +325,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ThrowObject.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowObject;
                 @ThrowObject.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowObject;
                 @ThrowObject.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowObject;
+                @ReturnObject.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnObject;
+                @ReturnObject.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnObject;
+                @ReturnObject.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnObject;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -315,6 +341,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ThrowObject.started += instance.OnThrowObject;
                 @ThrowObject.performed += instance.OnThrowObject;
                 @ThrowObject.canceled += instance.OnThrowObject;
+                @ReturnObject.started += instance.OnReturnObject;
+                @ReturnObject.performed += instance.OnReturnObject;
+                @ReturnObject.canceled += instance.OnReturnObject;
             }
         }
     }
@@ -378,5 +407,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnThrowObject(InputAction.CallbackContext context);
+        void OnReturnObject(InputAction.CallbackContext context);
     }
 }
