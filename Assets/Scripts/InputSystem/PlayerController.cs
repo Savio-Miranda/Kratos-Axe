@@ -57,7 +57,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""ReturnObject"",
                     ""type"": ""Button"",
-                    ""id"": ""9b6124dc-0fd6-47fb-a0cf-1de4503456b0"",
+                    ""id"": ""7d6507b7-efaf-436e-a595-11ee86dc04ca"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -144,7 +144,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fc5021a2-521d-49c7-a405-ad1570c1f6de"",
+                    ""id"": ""224784a4-ec3f-4ad8-93e6-93b141565f9b"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",

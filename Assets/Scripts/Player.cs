@@ -63,16 +63,4 @@ public class Player : MonoBehaviour
             Projectile.transform.parent = null;
         }
     }
-
-    public void ReturnObject()
-    {
-        if (inHand is false)
-        {
-            Projectile = GameObject.FindGameObjectWithTag("Flying Object");
-            Projectile.transform.parent = ObjectHolder;
-            Projectile.transform.position = ObjectHolder.position;
-            ProjectileBody.velocity = Vector3.zero;
-            ProjectileBody.constraints = RigidbodyConstraints.FreezeAll;
-        }
-    }
 }
