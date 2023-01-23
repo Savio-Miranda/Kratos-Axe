@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     public Transform Cam;
     public Transform ObjectHolder;
     public GameObject Projectile;
-    private Rigidbody ProjectileBody;
     private Rigidbody rigidBody;
     private bool inHand;
     private PlayerInputActions playerInputActions;
@@ -23,7 +22,6 @@ public class Player : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         rigidBody = transform.GetComponent<Rigidbody>();
-        ProjectileBody = Projectile.GetComponent<Rigidbody>();
     }
     void Update()
     {
@@ -48,7 +46,10 @@ public class Player : MonoBehaviour
     {
         if (inHand)
         {
+            Projectile.AddComponent<Rigidbody>();
+            Rigidbody ProjectileBody = Projectile.GetComponent<Rigidbody>();
             ProjectileBody.velocity = Vector3.zero;
+            ProjectileBody.drag = 1;
             Vector3 forceDirection = Cam.forward;
             RaycastHit hit;
             
@@ -62,5 +63,11 @@ public class Player : MonoBehaviour
             ProjectileBody.AddForce(forceToAdd, ForceMode.Impulse);
             Projectile.transform.parent = null;
         }
+    }
+
+    public void ReturnObject()
+    {
+        if (inHand is false)
+            Projectile.GetComponent<AxeTrajectory>().enabled = true;
     }
 }
